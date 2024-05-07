@@ -4,11 +4,11 @@ from collections import deque
 
 
 class Grafo:
-    def __init__(self,nodos:list,enlaces:list):
+    def __init__(self,nodos:list,enlaces:list,esDirigido:bool=True):
         self.nodos = {}
         if nodos:
             self.fillNodos(nodos)
-        self.generarEnlaces(enlaces)
+        self.generarEnlaces(enlaces,esDirigido)
     
 
     def fillNodos(self,nodos):
@@ -18,9 +18,16 @@ class Grafo:
     def belongs(self,nodo):
         return nodo in self.nodos
 
-    def generarEnlaces(self, enlaces:dict):
-        for (nodoA,nodoB),value in enlaces.items():
-            self.nodos[nodoA.nombre].agregarVecino(self.nodos[nodoB.nombre],value)
+    def generarEnlaces(self, enlaces:dict,esDirigidos:bool=True):
+        if esDirigidos:
+            for (nodoA,nodoB),value in enlaces.items():
+                self.nodos[nodoA.nombre].agregarVecino(self.nodos[nodoB.nombre],value)
+        else:
+            print('ENTRE NO DIRIGIDO')
+            for (nodoA,nodoB),value in enlaces.items():
+                self.nodos[nodoA.nombre].agregarVecino(self.nodos[nodoB.nombre],value)
+                self.nodos[nodoB.nombre].agregarVecino(self.nodos[nodoA.nombre],value)
+
 
     def agregarNodo(self,nodo:Nodo):
         self.nodos[nodo.nombre] = nodo

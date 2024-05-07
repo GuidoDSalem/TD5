@@ -6,6 +6,7 @@ class Nodo:
 
     def agregarVecino(self,nodo,valor=1):
         if self.esVecino(nodo):
+            # Ya es vecino, no hacer nada
             return
         else:
             self.vecinos[nodo.nombre] = valor
@@ -25,10 +26,10 @@ class Nodo:
 
     def __str__(self):
         value = "NOMBRE: " + str(self.nombre) \
-        + "\n\tVALOR: " + str(self.valor) \
-        + "\n\t\tVECINOS: "
-        for nodo in self.vecinos:
-            value += str(nodo)
+        + "\nVALOR: " + str(self.valor) \
+        + "\nVECINOS: \n"
+        for vecino,peso in self.vecinos.items():
+            value += str(vecino)+ ": " + str(peso) + "\n"
 
         return value
 
